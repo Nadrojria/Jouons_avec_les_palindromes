@@ -1,6 +1,6 @@
 let maxDays;
 
-function maxDaysInMonth (month, year) {
+function maxDaysInMonth(month, year) {
     if (month == 4 || month == 6 || month == 9 || month == 11) {
         maxDays = 30;
     } else if (month == 2 && year % 4 != 0) {
@@ -13,7 +13,7 @@ function maxDaysInMonth (month, year) {
     return maxDays;
 }
 
-function isValidDate (date) {
+function isValidDate(date) {
     let result = date.split("/");
     let dayValid = maxDaysInMonth(result[1], result[2]);
 
@@ -21,13 +21,13 @@ function isValidDate (date) {
         console.log("Retourne une date au format dd/mm/yyyy");
         return false;
     } else if (result[0] > dayValid) {
-        console.log(`${result[0]}/${result[1]}/${result[2]} a le jour invalide`);
+        //console.log(`${result[0]}/${result[1]}/${result[2]} a le jour invalide`);
         return false;
     } else if (result[1] < 1 || result[1] > 12) {
-        console.log(`${result[0]}/${result[1]}/${result[2]} a le mois invalide`);
+        //console.log(`${result[0]}/${result[1]}/${result[2]} a le mois invalide`);
         return false;
     } else if (result[2] < 1000 || result[2] > 9999) {
-        console.log(`${result[0]}/${result[1]}/${result[2]} a l'année invalide`);
+        //console.log(`${result[0]}/${result[1]}/${result[2]} a l'année invalide`);
         return false;
     } else {
         return true;
@@ -56,8 +56,24 @@ function isPalindrom(date) {
     }
 }
 
+function getNextPalindromes(x) {
+    let count = 0;
+    let date = new Date;
+    let year = date.getFullYear();
+    while (count < x) {
+        
+        let stringYear = year.toString();
+        let dayMonthYear = `${stringYear[3]}${stringYear[2]}/${stringYear[1]}${stringYear[0]}/${stringYear}`;
+        let result = isValidDate(dayMonthYear);
 
-isPalindrom("24/011/1992");
-isPalindrom("31/06/2024"); // pas de 31/06
-isPalindrom("29/02/2024");
-isPalindrom("11/02/2011");
+        if (result) {
+            count++;
+            year++;
+            console.log(dayMonthYear);
+        } else {
+            year++;
+        }
+    }
+} 
+
+getNextPalindromes(5);
